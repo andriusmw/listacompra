@@ -4,21 +4,26 @@
 <body>
 
 <script>
-var app = angular.module("myShoppingList", []); 
+var app = angular.module("myShoppingList", []); //Donde esté myShoppingList estará disponible todo lo de dentro del scope
 app.controller("myCtrl", function($scope) {
-    $scope.products = ["Milk", "Bread", "Cheese"];
-    $scope.addItem = function () {
+    $scope.products = ["Milk", "Bread", "Cheese"]; //array products
+    $scope.addItem = function () { //Función añadir
     $scope.products.push($scope.addMe);
+  }
+  $scope.removeItem = function (x) { //Función borrar
+    $scope.products.splice(x, 1);
   }
 });
 </script>
 
-<div ng-app="myShoppingList" ng-controller="myCtrl">
+<div ng-app="myShoppingList" ng-controller="myCtrl"> <!--Llaman al scope de la app y al controlador-->
   <ul>
-    <li ng-repeat="x in products">{{x}}</li>
+    <li ng-repeat="x in products">{{x}}<span ng-click="removeItem($index)">&times;</span>
+         </li> 
+    <!--bindea el li al ng-repeat que crea un bucle y recorre el array-->
   </ul>
-  <input ng-model="addMe">
-  <button ng-click="addItem()">Add</button>
+  <input ng-model="addMe">  <!--Le pasa info a la función addItem-->
+  <button ng-click="addItem()">Add</button>  <!--Llama a la función add item para que añada lo que hay en addMe cuando se hace click-->
 </div>
 
 <p>So far we have made an HTML list based on the items of an array.</p>
